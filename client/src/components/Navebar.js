@@ -4,9 +4,10 @@ import { BrowserRouter as Router, Switch,Route } from 'react-router-dom'
 
 import '../App.css';
 
-import Home from "../pages/Home";
-import Features  from "../pages/SignUp";
-import Pricing from "../pages/SignIn";
+
+import Signup  from "../pages/SignUp";
+import Signin from "../pages/SignIn";
+import Privacy from "../pages/Privacy";
 
 export default function Navebar() {
     return (
@@ -17,8 +18,6 @@ export default function Navebar() {
                 <Navbar.Brand className="brand" href="/">Home</Navbar.Brand>
                 <Nav>
                 <Navbar.Collapse className="justify-content-end">
-                    <Nav.Link href="/SignUp">Sign Up</Nav.Link>
-                    <Nav.Link href="/SignIn">Sign In</Nav.Link>
                 </Navbar.Collapse>
                 </Nav>
             </Container>
@@ -26,9 +25,10 @@ export default function Navebar() {
 
         <Router>
             <Switch>
-                <Route exact path="/" component={Home} />
-                <Route exact path="/SignUp" component={Features} />
-                <Route exact path="/SignIn" component={Pricing} />
+                
+                <Route exact path="/" component={Signin} />
+                <Route exact path="/signup" component={Signup} />
+                <Route exact path="/privacy" component={Privacy} />
             </Switch>
         </Router>
         </>

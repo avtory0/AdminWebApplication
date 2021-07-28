@@ -45,7 +45,8 @@
 
 .brand {
   font-size: 24px;
-  font-weight: bold
+  font-weight: bold;
+  color: #403866;
 }
 
 .nav-link {
@@ -81,7 +82,7 @@
   font-size: 20px;
 }
 
-.title {
+.form_title {
   font-family: 'Montserrat', sans-serif;
   font-size: 30px;
   color: #403866;
@@ -113,4 +114,18 @@
   height: 62px;
   padding: 0 20px 0 38px;
   border: none;
+}
+
+.form_description {
+  font-size: 16px;
+  text-align: center;
+  margin-top: 15px;
+}
+
+.form_description span {
+  color: #403866;
+}
+
+.form_link {
+  cursor: pointer;
 }
