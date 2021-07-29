@@ -129,3 +129,31 @@
 .form_link {
   cursor: pointer;
 }
+
+.wrap_table {
+  width: 1000px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 20px auto;
+  box-shadow: 0 5px 10px 0 rgb(0 0 0 / 10%);
+}
+
+.table {
+  width: 100%;
+  display: table;
+  margin: 0;
+  box-shadow: none;
+}
+
+.table_head {
+  background: #827ffe;
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+}
+
+tr {
+  font-size: 18px;
+}
+td:first-child {
+  text-align: center;
+}

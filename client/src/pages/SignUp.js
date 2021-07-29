@@ -21,6 +21,7 @@ function SignUp() {
       Axios.post("http://localhost:3001/auth", data).then(() => {
         console.log(data);
         history.push("/privacy");
+        
       });
     };
 

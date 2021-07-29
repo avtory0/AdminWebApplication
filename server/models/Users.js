@@ -16,6 +16,14 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
         defaultValue: "normal",
+      },
+      regDate: {
+        type: DataTypes.DATE,
+        allowNull: false,
+      },
+      lastLogin: {
+        type: DataTypes.DATE,
+        allowNull: false,
       }
     });
       return Users
