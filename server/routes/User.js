@@ -3,6 +3,7 @@ const router = express.Router();
 const { Users } = require("../models");
 const bcrypt = require("bcrypt");
 const {sign} = require("jsonwebtoken");
+const { validateToken } = require("../middlewares/Authmiddlewares");
 
 var date = new Date();
 
@@ -25,6 +26,12 @@ router.post("/", async (req, res) => {
     
     res.json("SUCCESS");
   });
+  const token = sign(
+    {login: req.body.login, id: req.body.id},
+    "secretstring"
+    ); 
+    
+    res.json(token);
   } catch(err) {
     console.log(err);
   }
@@ -59,6 +66,10 @@ router.post("/login", async (req, res) => {
       res.json(token);
     });
 
+});
+
+router.get("/", validateToken, (req, res) => {
+  res.json(req.user);
 });
 
 module.exports = router;

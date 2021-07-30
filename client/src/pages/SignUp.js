@@ -1,12 +1,11 @@
-import React from 'react';
-// import { Button, Form } from 'react-bootstrap'
+import React, {useContext} from 'react';
 import { Formik, Form, Field } from "formik";
 import {useHistory} from 'react-router-dom';
+import { AuthContext } from '../helpers/AuthContext';
+
 import "../App.css"
 
 const Axios = require('axios');
-
-
 
 function SignUp() {
     const initialValues = {
@@ -15,12 +14,19 @@ function SignUp() {
        password: "",
     };
     
+    const {setAuthState} = useContext(AuthContext);
+
     let history = useHistory();
 
     const onSubmit = (data) => {
-      Axios.post("http://localhost:3001/auth", data).then(() => {
-        console.log(data);
-        history.push("/privacy");
+      Axios.post("http://localhost:3001/auth", data).then((response) => {
+        if(response.data.error){
+          alert(response.data.error);
+        } else{
+          localStorage.setItem('token', response.data);
+          setAuthState(true);
+          history.push("/privacy");
+        }
         
       });
     };
@@ -49,7 +55,7 @@ function SignUp() {
           <button className="btn" type="submit">Sign Up</button>
           <div className="form_description">
         <span>Already have an account? </span>
-        <a className="form_link" onClick ={signin}>Sign In</a>
+        <a  className="form_link" onClick ={signin}>Sign In</a>
       </div>
     
         </Form>

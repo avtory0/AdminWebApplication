@@ -1,5 +1,7 @@
-import React, {useState}   from 'react'
+import React, {useContext, useState}   from 'react'
 import {useHistory} from 'react-router-dom';
+import { AuthContext } from '../helpers/AuthContext';
+
 import "../App.css";
 
 const Axios = require('axios');
@@ -8,6 +10,7 @@ export default function SignIn(){
   
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
+  const {setAuthState} = useContext(AuthContext);
   
   let history = useHistory();
 
@@ -18,6 +21,7 @@ export default function SignIn(){
         alert(response.data.error);
       } else{
         localStorage.setItem('token', response.data);
+        setAuthState(true);
         history.push("/privacy");
       }
     });
@@ -48,7 +52,7 @@ export default function SignIn(){
       <button className="btn" type="submit" onClick={signin}>Sign In</button>
       <div className="form_description">
         <span>No account? </span>
-        <a className="form_link" onClick ={signup}>Sign Up</a>
+        <a  className="form_link" onClick ={signup}>Sign Up</a>
       </div>
     
 

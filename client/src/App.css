@@ -130,7 +130,7 @@
   cursor: pointer;
 }
 
-.wrap_table {
+.wrap {
   width: 1000px;
   border-radius: 10px;
   overflow: hidden;
@@ -154,6 +154,35 @@
 tr {
   font-size: 18px;
 }
+
 td:first-child {
   text-align: center;
+}
+
+
+.table_btn {
+  height: 30px;
+  width: 100%;
+  font-size: 15px;
+  border: 0;
+  border-radius: 10px;
+}
+
+.toolbar {
+  display: flex;
+  flex-direction: row;
+  background: #827ffe;
+  height: 50px;
+  align-items: center;
+}
+
+
+
+.toolbar_btn {
+  display: inline-block;
+  height: 30px;
+  width: 200px;
+  border-radius: 10px;
+  border: none;
+  margin-left: 10px;
 }
