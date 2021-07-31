@@ -68,8 +68,68 @@ router.post("/login", async (req, res) => {
 
 });
 
-router.get("/", validateToken, (req, res) => {
+router.get("/", validateToken,  (req, res) => {
   res.json(req.user);
+});
+
+
+router.get('/privacy/test', async(req,res) => {
+
+});
+
+router.delete("/privacy/delete/:userid", async(req,res) => {
+  try{
+  const userid = req.params.userid;
+  var comma =",";
+  var arrayofid = userid.split(comma)
+  arrayofid.forEach(element => {
+    
+    Users.destroy({
+      where: {
+        id: element
+      }
+    });
+    res.json(userid)
+  });
+
+
+} catch(err) {
+  console.log(err)
+}
+});
+
+router.post("/privacy/block/:userid", async(req,res) => {
+  const userid = req.params.userid;
+  var comma =",";
+  var arrayofid = userid.split(comma)
+  arrayofid.forEach(element => {
+    
+     Users.update({
+      status: "block"
+    },{
+      where: {
+        id: element
+      }
+    });
+    res.json(userid)
+  });
+});
+
+router.post("/privacy/unblock/:userid", async(req,res) => {
+  const userid = req.params.userid;
+  var comma =",";
+  var arrayofid = userid.split(comma)
+  arrayofid.forEach(element => {
+    
+     Users.update({
+      status: "normal"
+    },{
+      where: {
+        id: element
+      }
+    });
+    res.json(userid)
+  });
 });
 
 module.exports = router;

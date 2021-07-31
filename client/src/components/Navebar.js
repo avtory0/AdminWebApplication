@@ -35,11 +35,6 @@ export default function Navebar() {
 
     },[]);
 
-    const logout = () => {
-        localStorage.removeItem("token");
-        setAuthState(false);
-    }
-
     return (
         <> 
 
