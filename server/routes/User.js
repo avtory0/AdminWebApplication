@@ -73,8 +73,32 @@ router.get("/", validateToken,  (req, res) => {
 });
 
 
-router.get('/privacy/test', async(req,res) => {
-
+router.get('/privacy/test', validateToken, async(req,res) => {
+  try{
+  const user = await Users.findOne({
+    where: {
+      id: req.user.id
+    }
+  })
+  if(user == null || user.status == "block" ){
+    res.json('logout');
+  } else {
+    res.json('ok')
+  }
+}
+catch (err) {
+  console.log(err);
+  
+}
+  // const user = await Users.findOne({
+  //   where: {
+  //     status: "block"
+  //   }
+  // })
+  // if(user == req.user) {
+  //   res.json(user)
+  //   console.log(user)
+  // }
 });
 
 router.delete("/privacy/delete/:userid", async(req,res) => {
@@ -82,14 +106,14 @@ router.delete("/privacy/delete/:userid", async(req,res) => {
   const userid = req.params.userid;
   var comma =",";
   var arrayofid = userid.split(comma)
-  arrayofid.forEach(element => {
+   arrayofid.forEach(element => {
     
     Users.destroy({
       where: {
         id: element
       }
     });
-    res.json(userid)
+    res.json(req.arrayofid)
   });
 
 
@@ -111,7 +135,7 @@ router.post("/privacy/block/:userid", async(req,res) => {
         id: element
       }
     });
-    res.json(userid)
+    res.json(arrayofid)
   });
 });
 

@@ -9,10 +9,19 @@ const Axios = require('axios');
 export default function Privacy() {
     
     const [listofUsers, setListofUseres] = useState([]);
+    const [newlistofUsers, setNewlistofUsers] = useState([]);
 
     let history = useHistory();
 
     useEffect(() =>{
+
+        if(!localStorage.getItem("token")) {
+            history.push("/");
+        }else {
+        Axios.get("http://localhost:3001/auth/privacy").then((response) => {
+            setListofUseres(response.data);
+
+        });
         //checkAll
         var btnCheck = document.querySelector('.table_btn');
         btnCheck.addEventListener('click', function(e) {
@@ -25,6 +34,18 @@ export default function Privacy() {
         }
     })
     
+    function test() {
+        Axios.get('http://localhost:3001/auth/privacy/test/', {
+            headers: { accessToken: localStorage.getItem("token") },
+        }).then((response) => {
+            console.log(response.data);
+            if(response.data === "logout") {
+                localStorage.removeItem("token");
+                history.push("/")
+            } 
+        })
+    }
+    test()
     function ids(IDarray) {
         var checked = document.querySelectorAll('input[type="checkbox"]:checked');
         checked.forEach(item => {
@@ -32,52 +53,48 @@ export default function Privacy() {
         });
         return IDarray;
     }
-
-    function test() {
-
-    }
-
+    
+    
     let arr = [];
     const delBtn = document.querySelector('#deleteUser');
     delBtn.addEventListener('click',() => {
         ids(arr)
+        test();
         Axios.delete(`http://localhost:3001/auth/privacy/delete/${arr}`, {
             usersId: arr
-        }).then((response) => {
-            
+        }).then((responce) => {
+            console.log(responce.data)
+            setListofUseres(listofUsers.filter((val) => {
+                return val.arr == arr
+            }))
         })
         console.log(arr)
     });
-
+    
     const blockBtn = document.querySelector('#blockUser');
-    blockBtn.addEventListener('click', () => {
+    blockBtn.addEventListener('click', (e) => {
         ids(arr);
+        test()
         Axios.post(`http://localhost:3001/auth/privacy/block/${arr}`, {
             usersId: arr
         }).then((response) => {
-            
+           const updateList = {status: response.data}
+           setListofUseres([...listofUsers, updateList]);
+        // setListofUseres(response.data);
         })
         console.log(arr);
     });
-
+    
     const unblockUsr = document.querySelector('#unblockUser');
     unblockUsr.addEventListener('click', () => {
         ids(arr);
         Axios.post(`http://localhost:3001/auth/privacy/unblock/${arr}`, {
             usersId: arr
         }).then((response) => {
-            
+           
         })
         console.log(arr);
     });
-
-        if(!localStorage.getItem("token")) {
-            history.push("/");
-        }else {
-        Axios.get("http://localhost:3001/auth/privacy").then((response) => {
-            setListofUseres(response.data);
-            
-        });
     }
     }, []);
 
@@ -88,6 +105,8 @@ const logout = () => {
     localStorage.removeItem("token");
     history.push("/");
 }
+
+
 
     return (
             <>
@@ -139,7 +158,9 @@ const logout = () => {
             </Table>
             </div>
     </Container>
-
+            {
+                
+            }
         </>
     )
 }

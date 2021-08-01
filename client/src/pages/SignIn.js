@@ -21,7 +21,11 @@ export default function SignIn(){
         alert(response.data.error);
       } else{
         localStorage.setItem('token', response.data);
-        setAuthState(true);
+        setAuthState({
+          login: response.data.login,
+          id: response.data.id,
+          status: true,
+        });
         history.push("/privacy");
       }
     });
