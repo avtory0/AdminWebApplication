@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/6fde24d3-f9d5-41a4-a14b-ef01e4712304/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/itratask4",
+    "appService.deploySubpath": "."
+}
