@@ -64,9 +64,7 @@ export default function Privacy() {
             usersId: arr
         }).then((responce) => {
             console.log(responce.data)
-            setListofUseres(listofUsers.filter((val) => {
-                return val.arr == arr
-            }))
+            
         })
         console.log(arr)
     });
@@ -78,8 +76,8 @@ export default function Privacy() {
         Axios.post(`http://localhost:3001/auth/privacy/block/${arr}`, {
             usersId: arr
         }).then((response) => {
-           const updateList = {status: response.data}
-           setListofUseres([...listofUsers, updateList]);
+        //    const updateList = {status: response.data}
+        //    setListofUseres([...listofUsers, updateList]);
         // setListofUseres(response.data);
         })
         console.log(arr);
